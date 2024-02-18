@@ -62,8 +62,8 @@ from sklearn.pipeline import Pipeline
 from sklearn.pipeline import make_pipeline
 
 # import category encoders
-get_ipython().system('pip install category_encoders')
-import category_encoders as ce
+# get_ipython().system('pip install category_encoders')
+# import category_encoders as ce
 
 # ML Algo
 from sklearn import svm
@@ -80,6 +80,9 @@ import sqlalchemy
 
 
 # In[3]:
+from configparser import ConfigParser
+config = ConfigParser()
+config.read("config.ini")
 
 
 # Ask User for URL to data file and fetch data from URL
@@ -96,11 +99,11 @@ def get_url_from_user():
     return url
 
 # Example usage:
-if __name__ == "__main__":
-    user_url = get_url_from_user()
-    print("You entered:", user_url)
+# if __name__ == "__main__":
+#    train_url = get_url_from_user()
+#    print("You entered:", train_url)
     
-    response = requests.get(user_url)
+    response = requests.get(train_url)
     score_data = sqlite3.connect('score.db')
     ## table name is known
     db_name = "score.db"
@@ -249,11 +252,11 @@ def get_url_from_user():
     return url
 
 # Example usage:
-if __name__ == "__main__":
-    user_url = get_url_from_user()
-    print("You entered:", user_url)
+# if __name__ == "__main__":
+    # Predict_url = get_url_from_user()
+    # print("You entered:", Predict_url)
 
-    response = requests.get(user_url)
+    response = requests.get(Predict_url)
     score_data = sqlite3.connect('score.db')
     ## table name is known
     db_name = "score.db"
@@ -318,7 +321,7 @@ def get_url_from_user():
     Returns:
     url (str): The URL inputted by the user.
     """
-    url = input("Please enter the file_path with final name ending in csv on your local drive where you want to save your final_test score prediction")
+    url = input("Please enter the file_path with file name ending in csv, where you want to save your final_test score prediction")
     
     return url
 
@@ -336,6 +339,7 @@ y_df.to_csv(file_path, index=False)
 # retrieve y_df to make sure it was saved
 y_df_final = pd.read_csv(file_path)
 y_df_final
+print("The final_test scores predicted by the MLP has been saved to your computer at :", file_path)
 
 
 # In[24]:
@@ -356,7 +360,7 @@ model_pipe2
 # In[26]:
 
 
-get_ipython().run_line_magic('whos', '')
+# get_ipython().run_line_magic('whos', '')
 
 
 # In[ ]:
